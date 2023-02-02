@@ -1,8 +1,8 @@
-import express from 'express';
-const router  = express.Router();
+const VERSION = process.env.VERSION;
+import version from './v1';
 
-router.get('/', (_req, res) => {
-  res.json({msg:'Hello World!'});
- });
+const routerAPI = (app) =>{
+  app.use(`/api/${VERSION}`, version);
+}
 
-export default router;
+export default routerAPI;

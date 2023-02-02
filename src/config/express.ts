@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import rootRoute from '@routes/index';
+import routerAPI from '@routes/index';
 import errorHandler from './expressError';
 import expressNotFound from './expressNotFound';
 import expressLogger from './expressLogger';
@@ -11,7 +11,7 @@ const createServer = () => {
   app.use(cors());
   app.use(express.json());
   app.disable('x-powered-by');
-  app.use('/', rootRoute);
+  routerAPI(app);
   app.use(expressNotFound);
   app.use(errorHandler);
   return app;

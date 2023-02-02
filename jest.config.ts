@@ -31,7 +31,8 @@ export default {
       "@models(.*)$": `${rootDirector}/src/dao/models$1`,
       "@routes(.*)$": `${rootDirector}/src/routes$1`,
       "@utils(.*)$": `${rootDirector}/src/utils$1`,
-      "@dao(.*)$": `${rootDirector}/src/dao$1`
+      "@dao(.*)$": `${rootDirector}/src/dao$1`,
+      "@controllers(.*)$": `${rootDirector}/src/controllers$1`
   },
   reporters: [
     'default',

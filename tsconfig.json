@@ -30,7 +30,8 @@
       "@models/*": ["src/dao/models/*"],
       "@routes/*": ["src/routes/*"],
       "@utils/*": ["src/utils/*"],
-      "@dao/*": ["src/dao/*"]
+      "@dao/*": ["src/dao/*"],
+      "@controllers/*": ["src/controllers/*"],
     }
   },
   "include": ["src/**/*", "__tests__/**/*"],
