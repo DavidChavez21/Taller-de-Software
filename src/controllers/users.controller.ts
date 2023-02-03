@@ -37,7 +37,7 @@ const updateUsers = (req, res)=>{
     datos.correo = body?.correo;
     datos.nombre = body?.nombre;
     datos.password = body?.password;
-    datos.roles = body?.roles;
+    datos.roles = [body?.roles];
     
     if(libs.USERS.service.update(datos)){
         return res.json({message: `Users with the id: ${id} updated!`});

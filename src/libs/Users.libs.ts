@@ -4,10 +4,11 @@ export interface IUser {
     correo: string,
     nombre: string,
     password: string,
-    roles?: string, 
+    roles?: string[], 
     creado?: Date, 
     ultimoAcceso?: Date
 }
+
 
 export class Users {
     private users: IUser[];
@@ -22,7 +23,7 @@ export class Users {
         const nuevo : IUser = {
             ...users,
             codigo: (Math.random() * 1000).toString() + date.getDate().toString(),
-            roles: 'ADM',
+            roles: ['ADM'],
             creado: date,
             ultimoAcceso: date
         }
@@ -45,7 +46,7 @@ export class Users {
     }
     
     update(updateUser : IUser){
-        const User = this.getById(updateUser.codigo);
+       const User = this.getById(updateUser.codigo);
        if(User){
         const newusers : IUser[] = this.users.map(user =>{
             if(user.codigo === updateUser.codigo){
