@@ -1,7 +1,7 @@
 import libs from '@libs/index';
 
 const findAll = (_req, res) => {
-    res.status(200).json(libs.USERS.service.getAll());
+    res.status(202).json(libs.USERS.service.getAll());
 }
 
 const getByID = (req, res)=>{
@@ -11,7 +11,7 @@ const getByID = (req, res)=>{
     if(datos){
         return res.status(201).json(datos)
     }
-    return res.status(201).json({ message: "Error to find users!"})
+    return res.status(404).json({ message: "Not Found!"})
 }
 
 const addUsers = (req,res)=>{
@@ -20,13 +20,17 @@ const addUsers = (req,res)=>{
     datos.nombre = nombre;
     datos.correo = correo;
     datos.password = password;
+    /*Validar si el correo ya existe */
+    if(libs.USERS.service.getByEmail(datos.correo)){
+        return res.status(401).json({message: 'Unaunthorized!'});
+    }
     if(confirmPassword == password){
         if(libs.USERS.service.add(datos)){
-            return res.json({message: "User created!"});
+            return res.status(201).json({message: "User created!"});
          } 
          return res.status(404).json({message: "Error to create a User!"});
     }
-    return res.status(403).json({message: 'Unaunthorized passwords needs to be the same!'});
+    return res.status(401).json({message: 'Unaunthorized passwords needs to be the same!'});
 }
 
 const updateUsers = (req, res)=>{
@@ -49,9 +53,9 @@ const deleteUsers = (req,res)=>{
     const { id } = req.params;
 
     if(libs.USERS.service.delete(id)){
-        return res.status(201).json(`Users with the id: ${id} deleted!`)
+        return res.status(202).json(`Users with the id: ${id} deleted!`)
     }
-    return res.status(201).json({ message: "Error to delete the user!"})
+    return res.status(202).json({ message: "Error to delete the user!"})
 }
 
 const getUrls = (_req, res) =>{

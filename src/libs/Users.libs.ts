@@ -19,7 +19,6 @@ export class Users {
 
     add(users : IUser){
         const date = new Date();
-
         const nuevo : IUser = {
             ...users,
             codigo: (Math.random() * 1000).toString() + date.getDate().toString(),
@@ -28,11 +27,20 @@ export class Users {
             ultimoAcceso: date
         }
         this.users.push(nuevo);
-        return nuevo;   
+        return nuevo; 
     }
 
     getAll(){
         return this.users;
+    }
+    getByEmail(correo : string){
+        const User = this.users.find((user)=>{
+            return user.correo === correo;
+        });
+        if(!User){
+            return false;
+        }
+        return true;
     }
 
     getById(codigo : string){
